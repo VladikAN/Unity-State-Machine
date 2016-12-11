@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace StateMachine.Core.Domain
 {
@@ -7,24 +6,51 @@ namespace StateMachine.Core.Domain
     {
         private readonly IList<IState> _states;
 
-        public StateMachine()
+        public StateMachine(IState currentState = null, IState defaultState = null)
         {
             _states = new List<IState>();
+
+            if (currentState != null)
+            {
+                CurrentState = currentState;
+                Add(CurrentState);
+            }
+
+            if (defaultState != null)
+            {
+                DefaultState = defaultState;
+                Add(DefaultState);
+            }
         }
 
-        public IState DefaultState { get; set; }
-        public IState CurrentState { get; set; }
+        public IState DefaultState { get; private set; }
+        public IState CurrentState { get; private set; }
 
         public void Add(IState state)
         {
+            if (state == null)
+            {
+                return;
+            }
+
             if (_states.IndexOf(state) == -1)
             {
                 _states.Add(state);
+
+                if (_states.Count == 1)
+                {
+                    CurrentState = state;
+                }
             }
         }
 
         public void Remove(IState state)
         {
+            if (state == null)
+            {
+                return;
+            }
+
             if (_states.IndexOf(state) != -1)
             {
                 _states.Remove(state);

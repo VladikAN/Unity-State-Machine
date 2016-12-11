@@ -21,5 +21,13 @@ namespace StateMachine.Core.Domain
         {
             return _action();
         }
+
+        public static Condition Build(IState parent, IState child, Func<bool> action)
+        {
+            var condition = new Condition(parent, child, action);
+            parent.Conditions.Add(condition);
+
+            return condition;
+        }
     }
 }

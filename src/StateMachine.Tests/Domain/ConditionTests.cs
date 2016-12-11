@@ -25,5 +25,19 @@ namespace StateMachine.Tests.Domain
 
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void Build_ConditionLinked()
+        {
+            var state1 = new State("State 1");
+            var state2 = new State("State 2");
+
+            var result = Condition.Build(state1, state2, () => true);
+
+            Assert.AreEqual(1, state1.Conditions.Count);
+            Assert.AreEqual(result, state1.Conditions[0]);
+            Assert.AreEqual(state1, result.Parent);
+            Assert.AreEqual(state2, result.Child);
+        }
     }
 }
