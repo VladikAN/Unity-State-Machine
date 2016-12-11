@@ -1,9 +1,11 @@
-﻿namespace StateMachine.Core.Domain
+﻿using System.Collections.Generic;
+
+namespace StateMachine.Core.Domain
 {
     public interface IState
     {
         string Name { get; }
-        ICondition[] Conditions { get; set; }
+        IList<ICondition> Conditions { get; set; }
 
         IState Update();
     }

@@ -1,23 +1,26 @@
-﻿namespace StateMachine.Core.Domain
+﻿using System.Collections.Generic;
+
+namespace StateMachine.Core.Domain
 {
     public class State : IState
     {
         public State(string name)
         {
             Name = name;
+            Conditions = new List<ICondition>();
         }
 
         public string Name { get; }
-        public ICondition[] Conditions { get; set; }
+        public IList<ICondition> Conditions { get; set; }
 
         public IState Update()
         {
-            if (Conditions == null || Conditions.Length == 0)
+            if (Conditions == null || Conditions.Count == 0)
             {
                 return this;
             }
 
-            for (var i = 0; i < Conditions.Length; i++)
+            for (var i = 0; i < Conditions.Count; i++)
             {
                 if (Conditions[i].Check())
                 {
