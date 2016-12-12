@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using StateMachine.Core.Domain;
 
 namespace StateMachine.Tests.Domain
@@ -32,6 +33,18 @@ namespace StateMachine.Tests.Domain
             var result = state1.Update();
 
             Assert.AreEqual(state3, result);
+        }
+
+        [Test]
+        public void Update_JobSpecified_JobCompleted()
+        {
+            var completed = false;
+            Action job = () => { completed = !completed; };
+            var state = new State("State", job);
+
+            state.Update();
+
+            Assert.IsTrue(completed);
         }
     }
 }
