@@ -6,6 +6,7 @@
 /Assets/AssetStoreTools*
 
 packages/
+!src/packages/repositories.config
 .idea/
 bin/
 obj/
