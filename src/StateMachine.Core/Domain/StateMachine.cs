@@ -57,6 +57,19 @@ namespace StateMachine.Core.Domain
             }
         }
 
+        public void UpdateNoCheck()
+        {
+            if (CurrentState == null)
+            {
+                CurrentState = DefaultState;
+            }
+
+            if (CurrentState != null)
+            {
+                CurrentState.UpdateNoCheck();
+            }
+        }
+
         public void Update()
         {
             if (CurrentState == null)
@@ -64,13 +77,11 @@ namespace StateMachine.Core.Domain
                 CurrentState = DefaultState;
             }
 
-            if (CurrentState == null)
+            if (CurrentState != null)
             {
-                return;
+                var state = CurrentState.Update();
+                CurrentState = state;
             }
-
-            var state = CurrentState.Update();
-            CurrentState = state;
         }
     }
 }

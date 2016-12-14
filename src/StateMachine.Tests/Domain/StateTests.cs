@@ -46,5 +46,17 @@ namespace StateMachine.Tests.Domain
 
             Assert.IsTrue(completed);
         }
+
+        [Test]
+        public void UpdateNoCheck_JobSpecified_JobCompleted()
+        {
+            var completed = false;
+            Action job = () => { completed = !completed; };
+            var state = new State("State", job);
+
+            state.UpdateNoCheck();
+
+            Assert.IsTrue(completed);
+        }
     }
 }

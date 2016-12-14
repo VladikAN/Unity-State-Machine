@@ -23,12 +23,17 @@ namespace StateMachine.Core.Domain
         public string Name { get; }
         public IList<ICondition> Conditions { get; set; }
 
-        public IState Update()
+        public void UpdateNoCheck()
         {
             if (_job != null)
             {
                 _job();
             }
+        }
+
+        public IState Update()
+        {
+            UpdateNoCheck();
 
             if (Conditions == null || Conditions.Count == 0)
             {

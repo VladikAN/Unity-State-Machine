@@ -7,6 +7,7 @@ namespace StateMachine.Core.Domain
         string Name { get; }
         IList<ICondition> Conditions { get; set; }
 
+        void UpdateNoCheck();
         IState Update();
     }
 }

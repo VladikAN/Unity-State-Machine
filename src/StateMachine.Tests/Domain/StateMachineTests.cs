@@ -57,5 +57,21 @@ namespace StateMachine.Tests.Domain
 
             Assert.AreEqual(nextState, stateMachine.CurrentState);
         }
+
+        [Test]
+        public void UpdateNoCheck_Condition_ConditionNotExecuted()
+        {
+            var currentState = new State("State 1");
+            var nextState = new State("State 2");
+            var condition = new Condition(currentState, nextState, () => true);
+            currentState.Conditions.Add(condition);
+
+            var stateMachine = new Core.Domain.StateMachine(currentState);
+
+            stateMachine.Add(nextState);
+            stateMachine.UpdateNoCheck();
+
+            Assert.AreEqual(currentState, stateMachine.CurrentState);
+        }
     }
 }
