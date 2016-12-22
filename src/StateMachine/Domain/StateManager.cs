@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace StateMachine.Core.Domain
+namespace StateMachine.Domain
 {
-    public class StateMachine : IStateMachine
+    public class StateManager : IStateManager
     {
         private readonly IList<IState> _states;
 
-        public StateMachine(IState currentState = null, IState defaultState = null)
+        public StateManager(IState currentState = null, IState defaultState = null)
         {
             _states = new List<IState>();
 

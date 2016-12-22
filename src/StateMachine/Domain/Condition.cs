@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StateMachine.Core.Domain
+namespace StateMachine.Domain
 {
     public class Condition : ICondition
     {

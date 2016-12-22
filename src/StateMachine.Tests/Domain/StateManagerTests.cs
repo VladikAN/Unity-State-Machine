@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using StateMachine.Core.Domain;
+using StateMachine.Domain;
 
 namespace StateMachine.Tests.Domain
 {
     [TestFixture]
-    public class StateMachineTests
+    public class StateManagerTests
     {
         [Test]
         public void Ctor_ParamsPassed_DefaultAndCurrentSet()
@@ -12,7 +12,7 @@ namespace StateMachine.Tests.Domain
             var currentState = new State("State 1");
             var defaultState = new State("State 2");
 
-            var stateMachine = new Core.Domain.StateMachine(currentState, defaultState);
+            var stateMachine = new StateManager(currentState, defaultState);
 
             Assert.AreEqual(currentState, stateMachine.CurrentState);
             Assert.AreEqual(defaultState, stateMachine.DefaultState);
@@ -22,7 +22,7 @@ namespace StateMachine.Tests.Domain
         public void Add_FirstState_CurrentChanged()
         {
             var state = new State("State");
-            var stateMachine = new Core.Domain.StateMachine();
+            var stateMachine = new StateManager();
 
             stateMachine.Add(state);
 
@@ -34,7 +34,7 @@ namespace StateMachine.Tests.Domain
         {
             var state1 = new State("State 1");
             var state2 = new State("State 1");
-            var stateMachine = new Core.Domain.StateMachine();
+            var stateMachine = new StateManager();
 
             stateMachine.Add(state1);
             stateMachine.Add(state2);
@@ -50,7 +50,7 @@ namespace StateMachine.Tests.Domain
             var condition = new Condition(currentState, nextState, () => true);
             currentState.Conditions.Add(condition);
 
-            var stateMachine = new Core.Domain.StateMachine(currentState);
+            var stateMachine = new StateManager(currentState);
 
             stateMachine.Add(nextState);
             stateMachine.Update();
@@ -66,7 +66,7 @@ namespace StateMachine.Tests.Domain
             var condition = new Condition(currentState, nextState, () => true);
             currentState.Conditions.Add(condition);
 
-            var stateMachine = new Core.Domain.StateMachine(currentState);
+            var stateMachine = new StateManager(currentState);
 
             stateMachine.Add(nextState);
             stateMachine.UpdateNoCheck();

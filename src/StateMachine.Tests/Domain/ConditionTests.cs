@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using StateMachine.Core.Domain;
+using StateMachine.Domain;
 
 namespace StateMachine.Tests.Domain
 {
