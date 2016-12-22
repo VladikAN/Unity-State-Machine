@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StateMachine.Core.Domain
+namespace StateMachine.Domain
 {
     public interface IState
     {

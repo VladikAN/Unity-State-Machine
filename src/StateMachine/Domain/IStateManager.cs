@@ -1,6 +1,6 @@
-﻿namespace StateMachine.Core.Domain
+﻿namespace StateMachine.Domain
 {
-    public interface IStateMachine
+    public interface IStateManager
     {
         IState DefaultState { get; }
         IState CurrentState { get; }

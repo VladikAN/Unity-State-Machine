@@ -1,4 +1,4 @@
-﻿namespace StateMachine.Core.Domain
+﻿namespace StateMachine.Domain
 {
     public interface ICondition
     {
