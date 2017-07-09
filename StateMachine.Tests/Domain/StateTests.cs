@@ -1,23 +1,22 @@
 ﻿using System;
-using NUnit.Framework;
 using StateMachine.Domain;
+using Xunit;
 
 namespace StateMachine.Tests.Domain
 {
-    [TestFixture]
     public class StateTests
     {
-        [Test]
+        [Fact]
         public void Update_EmptyConditions_ThisReturned()
         {
             var target = new State("State");
 
             var result = target.Update();
 
-            Assert.AreEqual(result, target);
+            Assert.Equal(result, target);
         }
 
-        [Test]
+        [Fact]
         public void Update_Conditions_ExpectedCondition()
         {
             var state1 = new State("State 1");
@@ -32,10 +31,10 @@ namespace StateMachine.Tests.Domain
 
             var result = state1.Update();
 
-            Assert.AreEqual(state3, result);
+            Assert.Equal(state3, result);
         }
 
-        [Test]
+        [Fact]
         public void Update_JobSpecified_JobCompleted()
         {
             var completed = false;
@@ -44,10 +43,10 @@ namespace StateMachine.Tests.Domain
 
             state.Update();
 
-            Assert.IsTrue(completed);
+            Assert.True(completed);
         }
 
-        [Test]
+        [Fact]
         public void UpdateNoCheck_JobSpecified_JobCompleted()
         {
             var completed = false;
@@ -56,7 +55,7 @@ namespace StateMachine.Tests.Domain
 
             state.UpdateNoCheck();
 
-            Assert.IsTrue(completed);
+            Assert.True(completed);
         }
     }
 }
