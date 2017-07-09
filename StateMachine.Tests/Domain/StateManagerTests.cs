@@ -1,12 +1,11 @@
-﻿using NUnit.Framework;
-using StateMachine.Domain;
+﻿using StateMachine.Domain;
+using Xunit;
 
 namespace StateMachine.Tests.Domain
 {
-    [TestFixture]
     public class StateManagerTests
     {
-        [Test]
+        [Fact]
         public void Ctor_ParamsPassed_DefaultAndCurrentSet()
         {
             var currentState = new State("State 1");
@@ -14,11 +13,11 @@ namespace StateMachine.Tests.Domain
 
             var stateMachine = new StateManager(currentState, defaultState);
 
-            Assert.AreEqual(currentState, stateMachine.CurrentState);
-            Assert.AreEqual(defaultState, stateMachine.DefaultState);
+            Assert.Equal(currentState, stateMachine.CurrentState);
+            Assert.Equal(defaultState, stateMachine.DefaultState);
         }
 
-        [Test]
+        [Fact]
         public void Add_FirstState_CurrentChanged()
         {
             var state = new State("State");
@@ -26,10 +25,10 @@ namespace StateMachine.Tests.Domain
 
             stateMachine.Add(state);
 
-            Assert.AreEqual(state, stateMachine.CurrentState);
+            Assert.Equal(state, stateMachine.CurrentState);
         }
 
-        [Test]
+        [Fact]
         public void Add_SecondState_CurrentNotChanged()
         {
             var state1 = new State("State 1");
@@ -39,10 +38,10 @@ namespace StateMachine.Tests.Domain
             stateMachine.Add(state1);
             stateMachine.Add(state2);
 
-            Assert.AreEqual(state1, stateMachine.CurrentState);
+            Assert.Equal(state1, stateMachine.CurrentState);
         }
 
-        [Test]
+        [Fact]
         public void Update_ConditionPassed_CurrentChanged()
         {
             var currentState = new State("State 1");
@@ -55,10 +54,10 @@ namespace StateMachine.Tests.Domain
             stateMachine.Add(nextState);
             stateMachine.Update();
 
-            Assert.AreEqual(nextState, stateMachine.CurrentState);
+            Assert.Equal(nextState, stateMachine.CurrentState);
         }
 
-        [Test]
+        [Fact]
         public void UpdateNoCheck_Condition_ConditionNotExecuted()
         {
             var currentState = new State("State 1");
@@ -71,7 +70,7 @@ namespace StateMachine.Tests.Domain
             stateMachine.Add(nextState);
             stateMachine.UpdateNoCheck();
 
-            Assert.AreEqual(currentState, stateMachine.CurrentState);
+            Assert.Equal(currentState, stateMachine.CurrentState);
         }
     }
 }
